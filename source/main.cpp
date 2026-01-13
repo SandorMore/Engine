@@ -3,9 +3,27 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <thread>
+#include <mutex>
+#include <time.h>
+#include <cmath>
+
 template<typename T>
 void DrawTriangle(const std::vector<T>& vertices) {
-
+	
+}
+void ProcessExit(GLFWwindow* window) {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, GL_TRUE);
+		return;
+	}
+}
+void RainbowBackground(GLFWwindow* window) {
+	GLfloat r, g, b;
+	r = (static_cast<float>(rand()) /RAND_MAX);
+	g = (static_cast<float>(rand()) / RAND_MAX);
+	b = (static_cast<float>(rand()) / RAND_MAX);
+	glClearColor(r, g, b, 1.0f);
 }
 int main() {
 
@@ -59,6 +77,7 @@ int main() {
 		char log[512];
 		glGetShaderInfoLog(vertexShader, 512, nullptr, log);
 		std::cerr << "Vertex shader compilation failer" << log << "\n";
+		return -1;
 	}
 	std::string fragmentShaderSource = R"(
 		#version 330 core
@@ -83,6 +102,7 @@ int main() {
 		char log[512];
 		glGetShaderInfoLog(fragmentShader, 512, nullptr, log);
 		std::cerr << "Fragment shader compilation failed" << log << "\n";
+		return -1;
 	}
 
 	GLuint shaderProgram = glCreateProgram();
@@ -96,6 +116,7 @@ int main() {
 		char log[512];
 		glGetProgramInfoLog(shaderProgram, 512, nullptr, log);
 		std::cerr << "Shader program linking failure" << log << "\n";
+		return -1;
 	}
 
 	glDeleteShader(vertexShader);
@@ -140,19 +161,24 @@ int main() {
 	glBindVertexArray(0);
 
 	GLint uColorLoc = glGetUniformLocation(shaderProgram, "uColor");
-
+	std::thread t;
+	srand(time(0));
 
 	while (!glfwWindowShouldClose(window)) {
-		glClearColor(1.0f, 1.0f, 0.32f, 3.0f);
+		/*glClearColor(1.0f, 1.0f, 0.32f, 3.0f);*/
+		(RainbowBackground(window));
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		
 		glUseProgram(shaderProgram);
 		glUniform4f(uColorLoc, 0.0f, 1.0f, 0.44f, 1.0f);
 		glBindVertexArray(vao);
+		
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
+		
+		
+		ProcessExit(window);
+		
 		glfwSwapBuffers(window);
-
 		glfwPollEvents();
 	}
 
