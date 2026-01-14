@@ -4,7 +4,7 @@ set(PROJECT_SOURCE_FILES
   source/main.cpp
 )
 include_directories(source)
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_FILES} "source/err.cpp")
 add_subdirectory(thirdparty/glfw-3.4 "${CMAKE_CURRENT_BINARY_DIR}/glfw_build")
 include_directories(thirdparty/glfw-3.4/include)
 set(BUILD_UTILS OFF CACHE BOOL "utilities" FORCE)

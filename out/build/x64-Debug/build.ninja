@@ -58,6 +58,15 @@ build CMakeFiles\SasoEngine.dir\source\main.cpp.obj: CXX_COMPILER__SasoEngine_un
   TARGET_COMPILE_PDB = CMakeFiles\SasoEngine.dir\
   TARGET_PDB = SasoEngine.pdb
 
+build CMakeFiles\SasoEngine.dir\source\err.cpp.obj: CXX_COMPILER__SasoEngine_unscanned_Debug C$:\Users\msaso\Desktop\SasoEngine\source\err.cpp || cmake_object_order_depends_target_SasoEngine
+  DEFINES = -DGLEW_STATIC
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -IC:\Users\msaso\Desktop\SasoEngine\source -IC:\Users\msaso\Desktop\SasoEngine\thirdparty\glfw-3.4\include -IC:\Users\msaso\Desktop\SasoEngine\thirdparty\glew\include
+  OBJECT_DIR = CMakeFiles\SasoEngine.dir
+  OBJECT_FILE_DIR = CMakeFiles\SasoEngine.dir\source
+  TARGET_COMPILE_PDB = CMakeFiles\SasoEngine.dir\
+  TARGET_PDB = SasoEngine.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target SasoEngine
@@ -66,7 +75,7 @@ build CMakeFiles\SasoEngine.dir\source\main.cpp.obj: CXX_COMPILER__SasoEngine_un
 #############################################
 # Link the executable SasoEngine.exe
 
-build SasoEngine.exe: CXX_EXECUTABLE_LINKER__SasoEngine_Debug CMakeFiles\SasoEngine.dir\source\main.cpp.obj | glfw_build\src\glfw3.lib lib\libglew32d.lib || glfw_build\src\glfw3.lib lib\libglew32d.lib
+build SasoEngine.exe: CXX_EXECUTABLE_LINKER__SasoEngine_Debug CMakeFiles\SasoEngine.dir\source\main.cpp.obj CMakeFiles\SasoEngine.dir\source\err.cpp.obj | glfw_build\src\glfw3.lib lib\libglew32d.lib || glfw_build\src\glfw3.lib lib\libglew32d.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = glfw_build\src\glfw3.lib  lib\libglew32d.lib  opengl32.lib  glu32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
